@@ -1,0 +1,19 @@
+version: '2'
+services:
+  app:
+    build: .
+    volumes:
+      - ./input:/home/files/input
+      - ./output:/home/files/output
+      - ./scripts:/home/files/scripts
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+    environment:
+      MIRTH_DB_USERNAME: mirth
+      MIRTH_DB_PASSWORD: mirth
+      MIRTH_DB_NAME: mirth
+      MIRTH_DB_HOST: 172.16.168.129
+      MIRTH_DB_INSTANCENAME: SQLEXPRESS
+      KEYSTORE_PASS: p\*AA[7E>s`5E2bx
+      KEYSTORE_KEYPASS: p\*AA[7E>s`5E2bx
