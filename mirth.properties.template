@@ -61,7 +61,7 @@ database = sqlserver
 #	Oracle		jdbc:oracle:thin:@localhost:1521:DB
 #	SQLServer	jdbc:jtds:sqlserver://localhost:1433/mirthdb
 
-database.url = jdbc:jtds:sqlserver://${MIRTH_DB_HOST};instance=${MIRTH_DB_INSTANCENAME}
+database.url = jdbc:jtds:sqlserver://${MIRTH_DB_HOST}/${MIRTH_DB_NAME};instance=${MIRTH_DB_INSTANCENAME}
 
 # if using a custom driver, specify it here
 #database.driver =

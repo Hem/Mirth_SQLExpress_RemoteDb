@@ -41,3 +41,28 @@
 
 ## wait-for-it
 - We can wait for the database to be available if we execute
+
+
+## SQL Scripts
+~~~~ sql
+WITH channels AS (
+	SELECT c.NAME, CAST(c.CHANNEL AS XML) ChannelInfo
+	FROM CHANNEL c
+) 
+SELECT DISTINCT '- "' + n.c.value('.', 'varchar(20)') + ':' + n.c.value('.', 'varchar(20)') + '" '
+FROM channels c
+	CROSS APPLY c.ChannelInfo.nodes('/channel/sourceConnector/properties/listenerConnectorProperties/port') N(c)
+~~~~
+
+~~~~ sql
+WITH channels AS (
+	SELECT c.NAME, CAST(c.CHANNEL AS XML) ChannelInfo
+	FROM CHANNEL c
+	WHERE c.NAME like '%trinity%'
+) 
+SELECT name, 
+	e.c.value('(/channel/enabled)[1]', 'varchar(10)') [Enabled],
+	e.c.value('(/channel/sourceConnector/properties/listenerConnectorProperties/port)[1]', 'int') [Port]
+FROM channels c
+	CROSS APPLY c.ChannelInfo.nodes('/channel') E(c)
+~~~~
